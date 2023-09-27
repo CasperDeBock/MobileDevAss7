@@ -2,36 +2,36 @@ import React, {useState} from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import GameButton from '../buttons/GameButton';
 import ResultsButton from '../buttons/ResultsButton';
-import NewsSection from './NewsSection';
-import FilterButton from '../buttons/FilterButton';
-
+import NewsSection from './games/NewsSection';
+import SuperDrawSection from './games/SuperDrawSection';
+import DiceSection from './games/DiceSection';
 
 
 function SectionSection() {
 
     const games=[
     {
-        title: "ROCKETS",
-        icon: "rocket",
+      title: "NEWS",
+      icon: "note"
+      
+    },
+    {
+        title: "DICE ROLL",
+        icon: "law",
     },
     {
         title: "SUPER DRAW",
         icon: "ruby",
     },
-    {
-        title: "DICE ROLL",
-        icon: "law",
-    }
 
   ]
 
-  const [active, setActive] = useState("ROCKETS");
+  const [active, setActive] = useState("NEWS");
+  const [page, setPage] = useState(active);
 
   const handleActive = (tagtitle: string) => {  
     setActive(tagtitle);
   }
-  
-
 
     return (
         <View style={styles.sectionSection}>
@@ -42,11 +42,23 @@ function SectionSection() {
                     <GameButton key={game.title} text={game.title} icon={game.icon} active={active} onTouch={handleActive} />
                 ))}
             </ScrollView>
-            <Text style={styles.title}>Check out</Text>
-            <Text style={styles.sectionTitle}>Latest news</Text>
-            
-            <NewsSection/>
-            <ResultsButton/>
+
+            { active === "NEWS" &&
+            <View>
+              <Text style={styles.title}>Check out</Text>
+              <Text style={styles.sectionTitle}>Latest news</Text>
+              <NewsSection/>
+              <ResultsButton/>
+            </View>
+            }
+            { active === "DICE ROLL" &&
+            <DiceSection/>
+            }
+            { active === "SUPER DRAW" &&
+            <SuperDrawSection/>
+            }
+       
+
       </View>
     )
 }
