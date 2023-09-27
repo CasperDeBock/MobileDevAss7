@@ -4,16 +4,21 @@ import Icon from 'react-native-vector-icons/Octicons';
 import { useState } from 'react';
 
 
-function GameButton(props: { text: string, icon: string, active: string }) {
+function GameButton(props: { text: string, icon: string, active: string, onTouch: any }) {
     const [color, setColor] = useState("#282856");
     useEffect(() => {
         if(props.active === props.text){
             setColor("#fff");
         }
+        else{
+            setColor("#282856");
+        }
     }, [props.active])
 
+    console.log(props.active);
+
     return (
-        <TouchableHighlight style={props.active === props.text ? styles.activeBtn :styles.gameButton}>
+        <TouchableHighlight onPress={() => props.onTouch(props.text)} style={props.active === props.text ? styles.activeBtn :styles.gameButton}>
         <View style={styles.contentBtn}>
             <Icon name={props.icon} size={32} color={color} />
             <Text style={props.active === props.text ? styles.activeBtnText : styles.gameButtonText}>{props.text}</Text>

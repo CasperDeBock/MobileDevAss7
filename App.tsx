@@ -40,7 +40,7 @@ function App(): JSX.Element {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
    
   };
-  console.log("ddsf");
+
 
   return (
     <SafeAreaView style={backgroundStyle}>

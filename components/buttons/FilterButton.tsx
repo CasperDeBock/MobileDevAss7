@@ -3,9 +3,9 @@ import { View, Text, StyleSheet,TouchableHighlight } from 'react-native';
 
 
 
-function FilterButton(props: {tagtitle:string, active: string }) {
+function FilterButton(props: {tagtitle:string, active: string, onTouch: any }) {
     return(
-        <TouchableHighlight style={styles.tag}>
+        <TouchableHighlight onPress={() => props.onTouch(props.tagtitle, "all")} style={styles.tag}>
             <Text style={props.active === props.tagtitle ?  styles.activeTagText : styles.tagText}>{props.tagtitle}</Text>
         </TouchableHighlight>
     )
