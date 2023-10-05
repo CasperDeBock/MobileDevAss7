@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, TextInput, Image, Pressable, Alert } from 'reac
 
 function DiceSection() {
   const [amount, setAmount] = useState("0");
-  const diceimage = require('../../../images/dice.png');
+  const diceimage = require('../images/dice.png');
 
   const handleGame = () => {
     let random = Math.floor(Math.random() * 6) + 1;
@@ -38,7 +38,7 @@ function DiceSection() {
 
 const styles = StyleSheet.create({
   wrapper: {
-      paddingRight: 24,
+    padding : 24,
       },
     title: {
         fontSize: 24,
@@ -54,7 +54,6 @@ const styles = StyleSheet.create({
     textinput: {
     height: 50,
     backgroundColor: 'lightgrey',
-    border: 0,
     borderRadius: 5,
     paddingLeft: 10,
     marginBottom: 10,

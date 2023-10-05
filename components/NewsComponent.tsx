@@ -1,10 +1,10 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, Pressable } from 'react-native';
 
 
-function NewsComponent(props : {title: string, description: string, date: string, image: string}) {
+function NewsComponent(props : {title: string, description: string, date: string, image: string, handleNavigate: any}) {
     return (
-       <View style={styles.newsBlock}>
+       <Pressable onPress={props.handleNavigate} style={styles.newsBlock}>
         <Image style={styles.newsImage} source={{uri: props.image}}/>
             <View style={styles.newsInfoWrapper}>
                 <Text style={styles.newsTitle}>{props.title}</Text>
@@ -12,7 +12,7 @@ function NewsComponent(props : {title: string, description: string, date: string
                 <Text style={styles.newsDate}>{props.date}</Text>
             </View>
            
-       </View>
+       </Pressable>
     )
 }
 

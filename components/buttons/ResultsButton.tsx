@@ -1,10 +1,10 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Pressable } from 'react-native';
 
 
-function ResultsButton() {
+function ResultsButton({navigation}) {
     return (
-        <View style={styles.resultsGameContainer}>
+        <Pressable onPress={() => navigation.navigate("Results")} style={styles.resultsGameContainer}>
               <View style={styles.resultTextContainer}>
                 <Text style={styles.resultsTitle}>Results</Text>
                 <Text style={styles.resultsText}>Check all the results from last game</Text>
@@ -12,7 +12,7 @@ function ResultsButton() {
               <View>
                 <Text style={styles.arrow}>&#8594;</Text>	
               </View>
-        </View>
+        </Pressable>
     )
 }
 

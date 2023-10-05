@@ -1,71 +1,60 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
+// App.js file contents
 import React from 'react';
-import type {PropsWithChildren} from 'react';
-
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  useColorScheme,
-  View,
-} from 'react-native';
-
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-import FirstSection from './components/sections/FirstSection';
-import SecondSection from './components/sections/SecondSection';
-
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 
+const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
 
-function App(): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
+// Screens
+import HomeScreen from './screens/Home';
+import SuperDrawSection from './screens/SuperDrawSection';
+import DiceSection from './screens/DiceSection';
+import DetailArticle from './screens/DetailNews';
+import Results from './screens/Results';
 
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-   
-  };
-
-
+const HomeStack = () => {
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>  
-        <View style={styles.container}>
-          <FirstSection/>
-          <SecondSection/>    
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+    <Stack.Navigator>
+      <Stack.Screen name="News" component={HomeScreen} />
+      <Stack.Screen name="News Article" component={DetailArticle} />
+      <Stack.Screen name="Results" component={Results} />
+    </Stack.Navigator>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#fff',
-    flex: 1,
-    position: 'relative',
-  },
-});
+const App = () => {
+  return (
+    <NavigationContainer>
+        <Tab.Navigator
+        screenOptions={({ route }) => ({
+          tabBarIcon: ({ focused, color, size }) => {
+            let iconName;
+
+            if (route.name === 'Home') {
+              iconName = 'home'; 
+            } else if (route.name === 'Super Draw') {
+              iconName = 'gift'; 
+            } else if (route.name === 'Dice Roll') {
+              iconName = 'dice'; 
+            }
+            return <Ionicons name={iconName} size={size} color={color} />;
+          },
+        })}
+        tabBarOptions={{
+          activeTintColor: 'blue',
+          inactiveTintColor: 'gray', 
+        }}
+      >
+        <Tab.Screen name="Home" component={HomeStack} />
+        <Tab.Screen name="Super Draw" component={SuperDrawSection} />
+        <Tab.Screen name="Dice Roll" component={DiceSection} />
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
+};
 
 export default App;

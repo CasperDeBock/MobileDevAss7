@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableHighlight } from 'react-native';
+import { View, Text, StyleSheet, TouchableHighlight, Alert } from 'react-native';
 
 
 function FirstSection() {
@@ -19,7 +19,7 @@ function FirstSection() {
                 <Text style={styles.titleMiddleCircle}>20</Text>
                 <Text style={styles.numberMiddleCircle}>MILLION</Text>
             </View>
-            <TouchableHighlight style={styles.btnEnroll}><Text style={styles.btnText}>ENROLL</Text></TouchableHighlight>
+            <TouchableHighlight onPress={() => Alert.alert("You joined!")} style={styles.btnEnroll}><Text style={styles.btnText}>ENROLL</Text></TouchableHighlight>
         </View>
     )
 }

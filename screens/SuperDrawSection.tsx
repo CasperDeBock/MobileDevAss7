@@ -58,7 +58,7 @@ function SuperDrawSection() {
 
 const styles = StyleSheet.create({
     wrapper: {
-        paddingRight: 24,
+        padding : 24,
        },
      title: {
          fontSize: 24,
@@ -137,7 +137,6 @@ const styles = StyleSheet.create({
         textinput: {
             height: 50,
             backgroundColor: 'lightgrey',
-            border: 0,
             borderRadius: 5,
             paddingLeft: 10,
             marginBottom: 10,

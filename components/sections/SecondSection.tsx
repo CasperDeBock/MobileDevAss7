@@ -2,39 +2,42 @@ import React, {useState} from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import GameButton from '../buttons/GameButton';
 import ResultsButton from '../buttons/ResultsButton';
-import NewsSection from './games/NewsSection';
-import SuperDrawSection from './games/SuperDrawSection';
-import DiceSection from './games/DiceSection';
+import NewsSection from './NewsSection';
 
 
-function SectionSection() {
+function SectionSection({navigation}) {
 
     const games=[
     {
-      title: "NEWS",
+      title: "News",
       icon: "note"
       
     },
     {
-        title: "DICE ROLL",
+        title: "Dice Roll",
         icon: "law",
     },
     {
-        title: "SUPER DRAW",
+        title: "Super Draw",
         icon: "ruby",
     },
 
   ]
 
-  const [active, setActive] = useState("NEWS");
+  const [active, setActive] = useState("News");
   const [page, setPage] = useState(active);
 
   const handleActive = (tagtitle: string) => {  
     setActive(tagtitle);
+    if(tagtitle !== "News"){
+      navigation.navigate(tagtitle);
+    }
+    
   }
 
     return (
         <View style={styles.sectionSection}>
+          {/*  
             <Text style={styles.title}>Games</Text>
             <Text style={styles.sectionTitle}>Choose your game</Text>
             <ScrollView horizontal={true} style={styles.gameButtonContainer}>
@@ -42,22 +45,10 @@ function SectionSection() {
                     <GameButton key={game.title} text={game.title} icon={game.icon} active={active} onTouch={handleActive} />
                 ))}
             </ScrollView>
-
-            { active === "NEWS" &&
-            <View>
-              <Text style={styles.title}>Check out</Text>
-              <Text style={styles.sectionTitle}>Latest news</Text>
-              <NewsSection/>
-              <ResultsButton/>
-            </View>
-            }
-            { active === "DICE ROLL" &&
-            <DiceSection/>
-            }
-            { active === "SUPER DRAW" &&
-            <SuperDrawSection/>
-            }
-       
+            */}
+            <Text style={styles.title}>News</Text>
+           <NewsSection navigation={navigation}/>
+           <ResultsButton navigation={navigation}/>
 
       </View>
     )

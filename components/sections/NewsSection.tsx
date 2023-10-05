@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, StyleSheet, ScrollView, TextInput} from 'react-native';
-import NewsComponent from '../../NewsComponent';
-import FilterButton from '../../buttons/FilterButton';
+import NewsComponent from '../NewsComponent';
+import FilterButton from '../buttons/FilterButton';
 
-function NewsSection() {
+function NewsSection({navigation}) {
   const filterButtons = [
     {
       id: 1,
@@ -29,7 +29,7 @@ function NewsSection() {
   const [searchText, setSearchText] = useState('');
 
   useEffect(() => {
-    let datafile = require('../../../data/data.json');
+    let datafile = require('../../data/data.json');
     setData(datafile.data);
   }, []);
 
@@ -42,6 +42,10 @@ function NewsSection() {
     });
     setFilteredData(newData);
   }, [active, searchText, data]);
+
+  const navigatetoDetail = item => {
+    navigation.navigate('News Article',{article: item});
+  }
 
   const handleFilter = tag => {
     setActive(tag);
@@ -74,6 +78,7 @@ function NewsSection() {
             description={item.description}
             image={item.image}
             date={item.date}
+            handleNavigate={() => navigatetoDetail(item)}
           />
         ))
       ) : (
