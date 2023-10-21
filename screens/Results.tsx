@@ -3,11 +3,17 @@ import { View, Text, StyleSheet, SectionList } from 'react-native';
 
 function Results() {
 
-    const [winnerdata, setWinnerData] = useState([]);
-    useEffect(() => {
-        let datafile = require('../data/data.json');
-        setWinnerData(datafile.wingames);
+  const [winnerdata, setWinnerData] = useState([]);
+
+      useEffect(() => {
+        const apiUrl = 'https://caf6-178-164-30-10.ngrok-free.app/wingames';
+      
+        fetch(apiUrl)
+          .then((response) => response.json())
+          .then((data) => setWinnerData(data))
+          .catch((error) => console.error('Error fetching data:', error));
       }, []);
+  
 
 
       const sections = winnerdata;

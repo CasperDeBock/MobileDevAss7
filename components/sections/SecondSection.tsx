@@ -7,22 +7,6 @@ import NewsSection from './NewsSection';
 
 function SectionSection({navigation}) {
 
-    const games=[
-    {
-      title: "News",
-      icon: "note"
-      
-    },
-    {
-        title: "Dice Roll",
-        icon: "law",
-    },
-    {
-        title: "Super Draw",
-        icon: "ruby",
-    },
-
-  ]
 
   const [active, setActive] = useState("News");
   const [page, setPage] = useState(active);
