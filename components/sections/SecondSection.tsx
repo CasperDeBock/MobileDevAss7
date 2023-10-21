@@ -21,19 +21,9 @@ function SectionSection({navigation}) {
 
     return (
         <View style={styles.sectionSection}>
-          {/*  
-            <Text style={styles.title}>Games</Text>
-            <Text style={styles.sectionTitle}>Choose your game</Text>
-            <ScrollView horizontal={true} style={styles.gameButtonContainer}>
-                {games.map((game) => (  
-                    <GameButton key={game.title} text={game.title} icon={game.icon} active={active} onTouch={handleActive} />
-                ))}
-            </ScrollView>
-            */}
             <Text style={styles.title}>News</Text>
            <NewsSection navigation={navigation}/>
            <ResultsButton navigation={navigation}/>
-
       </View>
     )
 }

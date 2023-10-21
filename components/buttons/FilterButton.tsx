@@ -1,12 +1,40 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet,TouchableHighlight } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 
 function FilterButton(props: {tagtitle:string, active: string, onTouch: any }) {
+    const [preferredCardColor, setPreferredCardColor] = useState('#282856');
+
+      // update
+    useEffect( () => {
+      updateCardColor();
+    }, []);
+
+    const updateCardColor = async() => {
+        try {
+          const value = await AsyncStorage.getItem('cardbgcolor')
+          if(value !== null) {
+            // value previously stored
+            setPreferredCardColor(value);
+          }
+        } catch(e) {
+            console.log(e);
+        }
+      }
+    
+    
+
     return(
         <TouchableHighlight onPress={() => props.onTouch(props.tagtitle, "all")} style={styles.tag}>
-            <Text style={props.active === props.tagtitle ?  styles.activeTagText : styles.tagText}>{props.tagtitle}</Text>
+            <Text 
+            style={
+                props.active === props.tagtitle
+                  ? [styles.activeTagText, { backgroundColor: preferredCardColor, borderColor: preferredCardColor }]
+                  : [styles.tagText,{borderColor: preferredCardColor, color: preferredCardColor}]
+              }
+            >{props.tagtitle}</Text>
         </TouchableHighlight>
     )
   
@@ -46,9 +74,7 @@ const styles = StyleSheet.create({
         paddingBottom: 8,
         paddingLeft: 30,
         paddingRight: 30,
-        backgroundColor: "#282856",
         borderWidth: 2,
-        borderColor: "#282856",
     },
     
 });

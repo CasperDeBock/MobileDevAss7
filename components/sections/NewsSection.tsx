@@ -3,6 +3,7 @@ import {View, Text, StyleSheet, ScrollView, TextInput, Pressable} from 'react-na
 import NewsComponent from '../NewsComponent';
 import FilterButton from '../buttons/FilterButton';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 function NewsSection({navigation}) {
@@ -63,7 +64,7 @@ function NewsSection({navigation}) {
 
   const handleFilter = tag => {
     setActive(tag);
-    setSearchText('');
+    setpreferredActiveCategory(tag);
   };
 
   const addNews = async () => {
@@ -133,6 +134,26 @@ const editNews = async (item) => {
 
 
 
+  const [preferredActiveCategory, setpreferredActiveCategory] = useState(active);
+
+  // update
+  useEffect( () => {
+  updateActiveCategory();
+  }, []);
+
+  const updateActiveCategory = async() => {
+    try {
+      const value = await AsyncStorage.getItem('initialCategory')
+      if(value !== null) {
+        // value previously stored
+        setpreferredActiveCategory(value);
+        handleFilter(value);
+      }
+    } catch(e) {
+        console.log(e);
+    }
+  }
+
 
   return (
     <View style={styles.newsWrapper}>
@@ -141,7 +162,7 @@ const editNews = async (item) => {
           <FilterButton
             key={button.id}
             tagtitle={button.title}
-            active={active}
+            active={preferredActiveCategory}
             onTouch={() => handleFilter(button.title)}
           />
         ))}

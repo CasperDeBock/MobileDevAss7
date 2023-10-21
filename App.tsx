@@ -4,6 +4,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import SettingsIcon from './components/buttons/SettingsIcon';
 
 
 const Tab = createBottomTabNavigator();
@@ -15,13 +16,19 @@ import SuperDrawSection from './screens/SuperDrawSection';
 import DiceSection from './screens/DiceSection';
 import DetailArticle from './screens/DetailNews';
 import Results from './screens/Results';
+import SettingsScreen from './screens/SettingsScreen';
 
 const HomeStack = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="News" component={HomeScreen} />
+      <Stack.Screen name="News" component={HomeScreen} 
+      options= { ({navigation}) => ({
+            headerRight: () => (<SettingsIcon navigation={navigation}/>)
+          })}
+       />
       <Stack.Screen name="News Article" component={DetailArticle} />
       <Stack.Screen name="Results" component={Results} />
+      <Stack.Screen name="SettingsScreen" component={SettingsScreen} />
     </Stack.Navigator>
   );
 }
